@@ -120,7 +120,7 @@ def plot_player_graph(data):
     graph = nx.Graph([(win, loss) for (win, loss) in df.values])
     if player in graph:
         subgraph = graph.subgraph([player] + list(graph.neighbors(player)))
-        net = Network(directed=False, notebook=True)
+        net = Network(directed=False, notebook=False)
         net.from_nx(subgraph)
         net.show("visualization.html")
     else:
