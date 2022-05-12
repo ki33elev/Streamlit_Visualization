@@ -126,7 +126,10 @@ def plot_player_graph(data):
         nx.set_node_attributes(subgraph, color_map, name="color")
         net = Network(directed=False, notebook=False)
         net.from_nx(subgraph)
-        net.show("visualization.html")
+        net.show("graph.html")
+        file = open("graph.html", 'r', encoding='utf-8')
+        source_code = file.read()
+        components.html(source_code, height=1000, width=1000)
     else:
         st.error(f'{player} did not play any matches on {surface} in {year}. Please change one of the settings')
 
