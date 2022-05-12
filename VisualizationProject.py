@@ -120,12 +120,13 @@ def plot_player_graph(data):
     graph = nx.Graph([(win, loss) for (win, loss) in df.values])
     if player in graph:
         subgraph = graph.subgraph([player] + list(graph.neighbors(player)))
+        color_map = dict()
+        for node in subgraph.nodes:
+            color_map[node] = 'red' if node == player else 'blue'
+        nx.set_node_attributes(subgraph, color_map, name="color")
         net = Network(directed=False, notebook=False)
         net.from_nx(subgraph)
-        net.show("graph.html")
-        file = open("graph.html", 'r', encoding='utf-8')
-        source_code = file.read()
-        components.html(source_code, height=1000, width=1000)
+        net.show("visualization.html")
     else:
         st.error(f'{player} did not play any matches on {surface} in {year}. Please change one of the settings')
 
